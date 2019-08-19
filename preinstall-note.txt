@@ -1,0 +1,30 @@
+//Generate debug keystore
+keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000
+keytool -importkeystore -srckeystore debug.keystore -destkeystore debug.keystore -deststoretype pkcs12
+
+//Assets Bundle
+react-native bundle --dev false --platform android --entry-file index.js --bundle-output ./android/app/src/main/assets/index.android.bundle --reset-cache --assets-dest ./android/app/src/main/res/
+
+//Generate APK Debug
+./gradlew assembleDebug
+
+//Generate APK Release
+./gradlew assembleRelease
+
+//For release version, add following block in node_modules/react-native/react.gradle right after "doFirst" block
+
+doLast {
+    def moveFunc = { resSuffix ->
+        File originalDir = file("$buildDir/generated/res/react/release/drawable-${resSuffix}");
+        if (originalDir.exists()) {
+            File destDir = file("$buildDir/../src/main/res/drawable-${resSuffix}");
+            ant.move(file: originalDir, tofile: destDir);
+        }
+    }
+    moveFunc.curry("ldpi").call()
+    moveFunc.curry("mdpi").call()
+    moveFunc.curry("hdpi").call()
+    moveFunc.curry("xhdpi").call()
+    moveFunc.curry("xxhdpi").call()
+    moveFunc.curry("xxxhdpi").call()
+}
