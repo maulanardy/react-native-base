@@ -5,6 +5,7 @@ import BaseComponent from '../../component/BaseComponent'
 
 export default class PeopleFragment extends BaseComponent {
   render() {
+    console.log(this.props.data)
     return (
       <FlatList
         style={{minHeight: 100, margin: 6}}

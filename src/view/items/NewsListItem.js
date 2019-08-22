@@ -12,7 +12,7 @@ export default class NewsListItem extends BaseComponent {
           <Image style={{height: 130, resizeMode: "cover"}} source={{uri: data.thumbnail}}/>
           <View style={{padding:10}}>
             <this.common.MText numberOfLines={2} style={{fontSize:10, letterSpacing:4, fontWeight: "bold", color: "#ed2623", marginBottom:5}}>{data.category.toUpperCase()}</this.common.MText>
-            <this.common.MText numberOfLines={2} style={{fontSize:10, color: "#505050", marginBottom:5}}>{data.date.format("LL")}</this.common.MText>
+            <this.common.MText numberOfLines={2} style={{fontSize:10, color: "#505050", marginBottom:5}}>{this.moment(data.date).format("LL")}</this.common.MText>
             <this.common.MText numberOfLines={2} style={{fontSize:12, fontWeight: "bold", color: "#505050"}}>{data.title}</this.common.MText>
           </View>
         </TouchableOpacity>

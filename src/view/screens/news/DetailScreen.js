@@ -7,9 +7,8 @@ import { Container, Text, Content, View, Button, Tab, Tabs, ScrollableTab} from 
 import BaseComponent from '../../../component/BaseComponent'
 import {MText, Separator} from '../../../component/Common'
 
-export default class DetailScreen extends BaseComponent {
+class DetailScreen extends BaseComponent {
   render() {
-
     const shareOptions = {
       title: 'JFW',
       message: 'some message',
@@ -41,3 +40,5 @@ export default class DetailScreen extends BaseComponent {
     )
   }
 }
+
+export default DetailScreen;

@@ -1,7 +1,13 @@
 import React, { Component } from 'react'
 import { Text, View } from 'react-native'
 import {createAppContainer} from 'react-navigation';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import IndexReducer from './redux/reducers/IndexReducer';
 import {createRootNavigator, DrawerNavigator} from './routes/MainRoute';
+import thunk from 'redux-thunk';
+
+const store = createStore(IndexReducer, applyMiddleware(thunk));
 
 export default class App extends Component {
   constructor(props) {
@@ -78,7 +84,9 @@ export default class App extends Component {
     const AppContainer = createAppContainer(DrawerNavigator);
 
     return (
-      <AppContainer />
+      <Provider store={ store }>
+        <AppContainer />
+      </Provider>
     )
   }
 }
