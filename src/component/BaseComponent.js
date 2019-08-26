@@ -56,4 +56,12 @@ export default class BaseScreen extends Component {
   mSetState(obj){
     this._mounted && this.setState(obj)
   }
+
+  errorMessage(err){
+    try {
+      return err.response.data
+    } catch (e) {
+      return err.message
+    }
+  }
 }
