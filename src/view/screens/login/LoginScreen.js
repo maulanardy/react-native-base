@@ -4,6 +4,7 @@ import {SafeAreaView, FlatList} from 'react-native'
 import { Container, Text, Content, View, Button, Tab, Tabs, ScrollableTab} from 'native-base';
 import BaseComponent from '../../../component/BaseComponent'
 import MInput from '../../../component/MInput'
+import AuthManager from '../../../lib/AuthManager'
 
 export default class LoginScreen extends BaseComponent {
   constructor(props){
@@ -12,8 +13,20 @@ export default class LoginScreen extends BaseComponent {
     this.idle = true
 
     this.state = {
-      name: ""
+      name: "",
+      email: "eve.holt@reqres.in",
+      password: "cityslicka"
     }
+  }
+
+  onPressLogin = () => {
+    AuthManager.signIn(this.state.email, this.state.password).then( async res => {
+      console.log(res)
+      let auth = await AuthManager.getAuthorization();
+      console.log(auth)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   render() {
@@ -40,7 +53,7 @@ export default class LoginScreen extends BaseComponent {
                   value={this.state.password}/>
               </View>
               <TouchableOpacity onPress={() => navigation.navigate("Forget")}><this.common.MText style={{fontSize: 14, textAlign: "right", marginEnd: 24}}>Forgot password?</this.common.MText></TouchableOpacity>
-              <this.common.TextActionButton label="LOGIN" style={{marginTop: 30}} onPress={() => {}}/>
+              <this.common.TextActionButton label="LOGIN" onPress={this.onPressLogin}/>
             </View>
             <View style={{flexDirection: "row", justifyContent: "center"}}>
               <this.common.MText style={{fontSize: 16}}>Don't have an Account? </this.common.MText><TouchableOpacity onPress={() => navigation.navigate("Register")}><this.common.MText style={{fontSize: 16, fontWeight: "bold"}}>Register</this.common.MText></TouchableOpacity>

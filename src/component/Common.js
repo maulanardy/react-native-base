@@ -4,7 +4,7 @@ import { Text } from 'native-base';
 import * as BaseStyle from '../assets/styles/BaseStyle'
 
 export const MText = (props) => (
-  <Text {...props} style={{...props.style, ...BaseStyle.typography.font}}>{props.children}</Text>
+  <Text {...props} style={[props.style, BaseStyle.typography.font]}>{props.children}</Text>
 )
 
 export const Separator = (props) => (

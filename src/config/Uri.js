@@ -8,5 +8,8 @@ export default {
   /**PROD**/
   // BASE_API: "https://swapi.co/api/",
 
+  /**DEV**/
+  AUTH_API: "https://reqres.in/api/",
+
   GEOCODE: 'https://maps.googleapis.com/maps/api/geocode/',
 };
