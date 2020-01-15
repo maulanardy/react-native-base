@@ -15,8 +15,22 @@ class IndexScreen extends BaseComponent {
   componentDidMount(){
     super.componentDidMount()
 
+    this.willFocusSubscription = this.props.navigation.addListener(
+      'willFocus',
+      payload => this.willFocus()
+    );
+
     this.props.setNewsCategoryList();
     this.props.setNewsList();
+  }
+
+  componentWillUnmount(){
+    super.componentWillUnmount()
+
+    this.willFocusSubscription.remove()
+  }
+
+  willFocus(){
   }
 
   render() {
